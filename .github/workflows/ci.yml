@@ -1,0 +1,40 @@
+---
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: opentofu/setup-opentofu@v2
+        with:
+          tofu_wrapper: false
+
+      - uses: terraform-linters/setup-tflint@v6
+
+      - name: Check formatting
+        run: tofu fmt -check -diff -recursive
+
+      - name: Initialise
+        run: tofu init -backend=false -input=false
+
+      - name: Validate
+        run: tofu validate
+
+      - name: Lint
+        run: |
+          tflint --init
+          tflint --format compact
