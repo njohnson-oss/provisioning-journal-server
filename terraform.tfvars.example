@@ -1,0 +1,5 @@
+domain = "example.com"
+
+# At least one of these must be set.
+ipv4 = "192.0.2.10"
+ipv6 = "2001:db8::10"
