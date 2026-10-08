@@ -1,5 +1,7 @@
 # provisioning-journal-server
 
+[![CI](https://github.com/njohnson-oss/provisioning-journal-server/actions/workflows/ci.yml/badge.svg)](https://github.com/njohnson-oss/provisioning-journal-server/actions/workflows/ci.yml)
+
 OpenTofu configuration for the DNS records of the journal server's
 domain, hosted on Infomaniak. It points the domain and its `www` / `git`
 subdomains at a server and publishes records declaring that the domain
